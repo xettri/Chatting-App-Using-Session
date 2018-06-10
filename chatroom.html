@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+  <head>
+  	<title>DChat</title>
+  	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="app_pics/logo/logo.png" type="image/x-icon" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="main/css/main.css" type="text/css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    .allSides {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+            -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+            -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+            -o-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6)
+        }
+    body{
+          background-image: url(2.jpg);
+        }
+      ::-webkit-scrollbar
+      { 
+          display: none; 
+      }
+      form {
+        padding: 3px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+    .list-grou-item {
+    padding: 3px 20px
+}
+    .namediv
+    {
+      border-top-right-radius: 25px;
+    }
+    .msgdiv
+    {
+      border-bottom-left-radius: 25px;
+    }
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+.sidenav .closebtn {
+    position: absolute;
+    top: 5;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+    </style>
+  </head>
+  <body>
+<div id="dnavside" class="sidenav unselectable">
+<center>
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <br>
+  <br>
+  <a href="#">Online <span class="onlinedot"></span></a>
+  <a href="whatsapp://send?text=https://whochat.herokuapp.com" data-action="share/whatsapp/share">Share On Whatsapp</a>
+  <a onclick="gototop()">Top</a>  
+  <a href="/about">About App</a>
+</center>
+</div>
+
+<div style="position: fixed;width: 100%;top: 0;z-index: 9999;background-color: #fff" class="allSides">
+  <center>
+      <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+  </center>
+</div>
+    <div style="height: 20%;overflow:scroll;margin-bottom:70px;" id="main">
+      <div class="container d-flex justify-content-center">
+      <div id="messages" style="margin-top: 40px;"></div>
+      </div>
+    </div>
+    <form action="">
+              <div class="panel-footer" style="box-shadow: 0 -5px 5px -5px #333;">
+                    <div class="input-group">
+                        <input id="txtmsg" type="text" autocomplete="off" class="form-control input-lg" placeholder="Type your message here..." maxlength="1500" />
+                        <span class="input-group-btn">
+                            <input type="submit" name="" class="btn btn-warning btn-lg">
+                        </span>
+                    </div>
+                </div>
+    </form>
+    <audio id="popup" src="/apptone/pop.mp3"></audio>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      var socket = io().connect('https://dchattesting.herokuapp.com');
+      $('form').submit(function(){
+        socket.emit('dchat msg', $('#txtmsg').val());
+        $('#txtmsg').val('');
+        return false;
+      });
+      socket.on('dchat msg', function(dmsg){
+        d=new Date().toLocaleTimeString();
+        if(dmsg.message.trim().length>0)
+        {     
+              $("#popup")[0].play();
+              $('#messages').append($('<div class="list-group-item namediv" style="margin-top:10px;width:100%;background:'+dmsg.ucolor+';">').text(dmsg.uname+' - '+d));
+              $('#messages').append($('<div style="word-break:break-all;" class="well msgdiv allSides">').text(dmsg.message));
+              $('html,body').animate({scrollTop: document.body.scrollHeight},"fast");
+        }
+      });
+    </script>
+<script>
+window.addEventListener("beforeunload", function (e) {
+    var confirmationMessage = 'Be carefull you will lost all chat';
+
+    (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+    return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+});
+function openNav() {
+        document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+        if (/Mobi/.test(navigator.userAgent))
+        {
+          document.getElementById("dnavside").style.width = "200px";
+        }
+        else
+        {
+          document.getElementById("dnavside").style.width = "250px";
+          document.getElementById("main").style.marginLeft = "250px";
+        }
+    }
+
+    function closeNav() {
+        document.getElementById("dnavside").style.width = "0";
+        document.getElementById("main").style.marginLeft= "0";
+        document.body.style.backgroundColor = "white";
+    }
+    function gototop(){
+      $("html, body").animate({ scrollTop: 0 }, "slow");
+    }
+
+</script>
+  </body>
+</html>
