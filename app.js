@@ -47,9 +47,7 @@ app.post("/",function(req,res)
 	req.session.user=key;
 	dmsg[req.session.user]=[colors[Math.floor(Math.random() * 14)]];
     dmsg[req.session.user][1]=user;
-    console.log("-----"+dmsg+"--------");
 	
-  console.log(req.session.user);
   res.sendFile(__dirname + '/chatroom.html');
 });
 
@@ -60,7 +58,6 @@ app.get('/about', function(req, res){
 
 io.on('connection', function(socket){
   socket.on('dchat msg', function(msg){
-	  console.log("---Session Msg---"+socket.request.session.user);
       dmsg.message=msg;
       console.log(dmsg);
       try
