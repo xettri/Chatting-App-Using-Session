@@ -31,7 +31,7 @@
                         <h1 style="font-size: 30">Choose A User Name</h1>
 
                         <form action="/" method="post" id="userform" onsubmit="chatroom()">
-                            <input type="text" id="username" name="user[name]" class="input" placeholder="Username" required="required" />
+                            <input type="text" id="username" name="username" class="input" placeholder="Username" required="required" />
                             <center>
                                 <input type="submit" name="submit" id="loginbtn" class="inputbtn unselectable" value="Enter In Chat"> </center>
                         </form>
@@ -52,16 +52,6 @@
         </footer>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-    
-    <script>
-      var socket = io().connect('https://dchattesting.herokuapp.com');
-      $('form').submit(function(){
-        socket.emit('EnterInChat', $('#username').val());
-        $('#username').val('');
-        document.getElementById("userform").submit();
-        return false;
-      });
-    </script>
 
         <script type="text/javascript">
             function chatroom()
