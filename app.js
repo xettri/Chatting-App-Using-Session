@@ -7,13 +7,13 @@ var path=require('path');
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 var session = require("express-session");
-var sessionStore = new session.MemoryStore()
+var SessionStore = new session.MemoryStore()
 
 
 var sessionMiddleware = session({
-  name: 'sid',
-  store: sessionStore, // MemoryStore
-  secret: 's3cr37',
+  name: 'bharatrawat',
+  store: SessionStore,
+  secret: 'qawsedrftgyhujikolpzcbmxbn',
   saveUninitialized: true,
   resave: true,
 });
