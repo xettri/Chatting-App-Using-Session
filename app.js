@@ -45,7 +45,6 @@ app.post("/",function(req,res)
 	user=data.username;
 	var key =user+Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
 	req.session.user=key;
-	
 	dmsg[req.session.user]=[colors[Math.floor(Math.random() * 14)]];
     dmsg[req.session.user][1]=user;
     console.log("-----"+dmsg+"--------");
