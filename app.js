@@ -50,7 +50,13 @@ app.post("/",function(req,res)
 	
   res.sendFile(__dirname + '/chatroom.html');
 });
-
+app.get('/logout', function(req, res){
+		dmsg[req.session.user]="";
+		req.session.user==undefined;
+		dmsg[req.session.user][1]="";
+		if(dmsg.message!=null || dmsg.message!=undefined){dmsg.message="";}
+		res.redirect("/");
+});
 
 app.get('/about', function(req, res){
   res.status(300).sendFile(path.join(__dirname,"about.html"));
@@ -59,7 +65,7 @@ app.get('/about', function(req, res){
 io.on('connection', function(socket){
   socket.on('dchat msg', function(msg){
       dmsg.message=msg;
-      console.log(dmsg);
+      //console.log(dmsg); //debuging
       try
       {
         dmsg.ucolor=dmsg[socket.request.session.user][0];
