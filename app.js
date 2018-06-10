@@ -79,4 +79,9 @@ io.on('connection', function(socket){
     });
 });
 
+app.get('*', function(req, res){
+  	var requrl=req.originalUrl.substring(1);
+ 	res.redirect('/');
+});
+
 http.listen(port);
