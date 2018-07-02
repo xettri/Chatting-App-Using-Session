@@ -11,11 +11,14 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "connect-redis": "^3.3.3",
+    "cookieparser": "^0.1.0",
+    "ejs": "^2.6.1",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "getmac": "^1.4.1",
     "internal-ip": "^3.0.1",
     "ipware": "^1.0.0",
+    "logger": "0.0.1",
     "node-macaddress": "^0.2.4",
     "socket.io": "^2.1.1"
   },
