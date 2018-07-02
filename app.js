@@ -8,6 +8,8 @@ var bodyParser                              = require('body-parser');
 var session                                 = require("express-session");
 var SessionStore                            = new session.MemoryStore();
 var helper                                  = require('./helper');
+var schedule                                = require('node-schedule');
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -30,7 +32,9 @@ app.use(sessionMiddleware);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname,"public")));
 
+//-----------------
 dmsg={};
+//-----------------
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -83,6 +87,10 @@ io.on('connection', function(socket){
     });
 });
 //------------------------------------------------------------------------
+
+var j = schedule.scheduleJob('0 * * *', function(){
+  dmsg={};
+});
 
 app.get('*', function(req, res){
   	var requrl=req.originalUrl.substring(1);
