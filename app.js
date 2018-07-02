@@ -55,6 +55,7 @@ app.post("/",function(req,res)
   	req.session.user=key;
   	dmsg[req.session.user]=[helper.AppConstant.colors[Math.floor(Math.random() * 14)]];
     dmsg[req.session.user][1]=user;
+    dmsg[req.session.user][2]='#DCE3DA'; //for ai;
     res.render('ChatRoom/PublicRoom/chat');
 });
 
@@ -84,7 +85,23 @@ io.on('connection', function(socket){
         dmsg.uname="Anonymous";
       }
       io.emit('dchat msg', dmsg);
+      io.emit('dchat msg', dmsg);
     });
+    //-----------------------------------------------------
+    socket.on('dchat_ai_msg', function(msg){
+        dmsg.message=msg;
+        try
+        {
+          dmsg.ucolor=dmsg[socket.request.session.user][2];
+          dmsg.uname=dmsg[socket.request.session.user][1];
+        }
+        catch(err)
+        {
+          dmsg.uname="Anonymous";
+        }
+        io.emit('dchat_ai_msg', dmsg);
+      });
+
 });
 //------------------------------------------------------------------------
 
