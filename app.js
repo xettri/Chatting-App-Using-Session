@@ -30,7 +30,6 @@ app.use(sessionMiddleware);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname,"public")));
 
-//colors=["#FFCDD2","#F50057","#9C27B0","#E040FB","#651FFF","#3D5AFE","#1E88E5","#00B0FF","#76FF03","#AEEA00","#FFC400","#FF6E40","#B0BEC5","#FFC107"];
 dmsg={};
 
 app.use(function(req, res, next) {
@@ -41,7 +40,7 @@ app.use(function(req, res, next) {
 
 app.get('/', function(req, res)
 {
-  res.render('index');
+  res.render('Index');
 });
 
 app.post("/",function(req,res)
