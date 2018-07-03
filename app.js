@@ -68,7 +68,6 @@ app.post("/GlobalChat",function(req,res)
   	req.session.user=key;
   	dmsg[req.session.user]=[helper.AppConstant.colors[Math.floor(Math.random() * 14)]];
     dmsg[req.session.user][1]=user;
-    console.log(req.session.user);
     res.render('ChatRoom/PublicRoom/chat',{user:req.session.user});
 });
 
@@ -85,7 +84,6 @@ app.post("/privateChat",function(req,res)
     ai.ucolor='#FFCDD2';
     ai.count=0;
     pmsg[req.session.user+'_ai']=ai;
-    console.log(ai);
     res.render('ChatRoom/AI/chat',{user:req.session.user});
 });
 
@@ -134,6 +132,18 @@ io.on('connection', function(socket){
           io.emit('dchat_ai_msg_'+socket.request.session.user, pmsg);
           AI_Reply = pmsg[socket.request.session.user+'_ai'];
           pmsg[socket.request.session.user+'_ai'].count++;
+
+          function sleep(milliseconds) {
+          var start = new Date().getTime();
+          for (var i = 0; i < 1e7; i++) {
+            if ((new Date().getTime() - start) > milliseconds){
+              break;
+              }
+            }
+          }
+
+          sleep(4000);
+
           if(pmsg[socket.request.session.user+'_ai'].count==15)
           {
             last=['Ok bey','i have work by','baad me baat karti hu cu','bey bey','tata cu','ok g cu','bey'+pmsg.uname]
