@@ -87,7 +87,7 @@
   <br>
   <br>
   <a>Online <span class="onlinedot"></span></a>
-  <a onclick="window.location.replace('/logout');" style="cursor: pointer;">Logout</a>
+  <a onclick="window.location.replace('/private/logout');" style="cursor: pointer;">Logout</a>
   <a href="whatsapp://send?text=https://whochat.herokuapp.com" data-action="share/whatsapp/share">Share On Whatsapp</a>
   <a onclick="gototop()">Top</a>
   <a href="/about">About App</a>
@@ -120,11 +120,11 @@
     <script>
       var socket = io().connect('https://dchattesting.herokuapp.com');
       $('form').submit(function(){
-        socket.emit('dchat_msg_<%= user %>', $('#txtmsg').val());
+        socket.emit('dchat_ai_msg_<%= user %>', $('#txtmsg').val());
         $('#txtmsg').val('');
         return false;
       });
-      socket.on('dchat_msg_global', function(dmsg){
+      socket.on('dchat_ai_msg_<%= user %>', function(dmsg){
         d=new Date().toLocaleTimeString();
         if(dmsg.message.trim().length>0)
         {
@@ -163,7 +163,6 @@ function openNav() {
     function gototop(){
       $("html, body").animate({ scrollTop: 0 }, "slow");
     }
-
 </script>
   </body>
 </html>
