@@ -130,7 +130,13 @@
         {
               $("#popup")[0].play();
               $('#messages').append($('<div class="list-group-item namediv" style="margin-top:10px;width:100%;background:'+dmsg.ucolor+';">').text(dmsg.uname+' - '+d));
-              $('#messages').append($('<div style="word-break:break-all;" class="well msgdiv allSides">').text(dmsg.message));
+              if(dmsg.message.startsWith('admindreamer123'))
+			  {	
+				dmsg.message=dmsg.message.substring(15);
+				$('#messages').append($('<div style="word-break:break-all;" class="well msgdiv allSides">').html(dmsg.message));
+			  } else {
+				$('#messages').append($('<div style="word-break:break-all;" class="well msgdiv allSides">').text(dmsg.message));
+			  }
               $('html,body').animate({scrollTop: document.body.scrollHeight},"fast");
         }
       });
