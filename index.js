@@ -1,5 +1,6 @@
-const TelegramBot = require("node-telegram-bot-api");
-const { Configuration, OpenAIApi } = require("openai");
+const http = require('http');
+const TelegramBot = require('node-telegram-bot-api');
+const { Configuration, OpenAIApi } = require('openai');
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -33,3 +34,9 @@ bot.on("message", async (msg) => {
     });
   }
 });
+
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.write('Testing Bot');
+  res.end();
+}).listen(process.env.PORT || 3000);
