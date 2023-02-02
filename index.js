@@ -14,6 +14,7 @@ bot.onText(/\/start/, (msg) => {
 
 bot.on("message", async (msg) => {
   const { chat, text } = msg;
+  console.log("msg:", text);
   try {
     const completion = await openai.createCompletion({
       model: "text-davinci-002",
