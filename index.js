@@ -9,7 +9,7 @@ const openai = new OpenAIApi(configuration);
 const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: true });
 
 bot.onText(/\/start/, (msg) => {
-  bot.sendMessage(msg.chat.id, "Hi! I'm ChatGPT. How can I help you today?");
+  bot.sendMessage(msg.chat.id, "Hi! what's upp");
 });
 
 bot.on("message", async (msg) => {
