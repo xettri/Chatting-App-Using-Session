@@ -1,25 +1,16 @@
 {
-  "name": "DChat",
+  "name": "testbot",
   "version": "1.0.0",
-  "description": "Chatting App",
-  "main": "app.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node index.js"
   },
-  "author": "Crazydreamer",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "connect-redis": "^3.3.3",
-    "express": "^4.16.3",
-    "express-session": "^1.15.6",
-    "getmac": "^1.4.1",
-    "internal-ip": "^3.0.1",
-    "ipware": "^1.0.0",
-    "node-macaddress": "^0.2.4",
-    "socket.io": "^2.1.1"
-  },
-  "engines": {
-    "node": "10.0.0"
+    "node-telegram-bot-api": "^0.61.0",
+    "openai": "^3.1.0"
   }
 }
